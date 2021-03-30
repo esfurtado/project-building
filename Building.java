@@ -1,98 +1,60 @@
 package Poised;
 
-public class Building {
+public abstract class Building {
 	
-	private long projectNo;
-	private String typeOfBuild;
-	private String projectName; //project name = type of building + customer name
-	private String buildAdress;
-	private double fee;
-	private long erfNo;
-	private String deadline;
-	private double amountPaid;
-	private Contractor contractor; 
-	private Architect architect; 
-	private Customer customer;
-	private boolean finalise;
+	public long projectNo;
+	public String typeOfBuild;
+	public String projectName;
+	public String buildAdress;
+	public double fee;
+	public long erfNo;
+	public String deadline;
+	public double amountPaid;
+	public Contractor contractor; 
+	public Architect architect; 
+	public Customer customer;
+	public boolean finalise;
+	
+	//getters
+	public abstract long getprojectNo();
+	public abstract String gettypeOfBuild();
+	public abstract String getprojectName();
+	public abstract String getbuildAdress();
+	public abstract double getFee();
+	public abstract long geterfNo();
+	public abstract String getdeadline();
+	public abstract double getamountPaid();
+	public abstract Contractor getContractor();
+	public abstract Architect getArchitect();
+	public abstract Customer getCustomer();
+	public abstract boolean getFinalise();
 	
 	
-	public String getdeadline() {
-		
-		return deadline;
-	}
-	
-	public String setdeadline(String newDeadline) {
-		
-		deadline = newDeadline;
-		return deadline;
-	}
-	
-	public double getamoundPaid() {
-		
-		return amountPaid;
-	}
-	
-	public double setamountPaid(double newAmountPaid) {
-		
-		amountPaid = amountPaid + newAmountPaid; //This adds to the previous amount
-		return amountPaid;
-	}
-	
-	public double getFee() {
-		
-		return fee;
-	}
-	
-	public double setFee(double newFee) {
-		fee = newFee;
-		return fee;
-	}
-	
-	public boolean getFinalise() {
-		
-		return finalise;
-	}
-	
-	public boolean setFinalise(boolean isFinalised) {
-		
-		finalise = isFinalised;
-		return finalise;
-	}
-	
-	public Building(long projectNo, String typeOfBuild, String buildAdress, double fee, long erfNo,
-			String deadline, double amountPaid, Contractor contractor, Architect architect, Customer customer) {
-		this.projectNo = projectNo;
-		this.typeOfBuild = typeOfBuild;
-		this.projectName = typeOfBuild + customer.name;
-		this.buildAdress = buildAdress;
-		this.fee = fee;
-		this.erfNo = erfNo;
-		this.deadline = deadline;
-		this.amountPaid = amountPaid;
-		this.finalise = false;
-		this.contractor = contractor;
-		this.architect = architect;
-		this.customer = customer;
-	}
+	//setters
+	public abstract String setdeadline(String newDeadline);
+	public abstract double setamountPaid(double newAmountPaid);
+	public abstract double setFee(double newFee);
+	public abstract boolean setFinalise(boolean isFinalised);	
 	
 	
 	public String toString() {
 		
-		String output = "Project number: " + projectNo;
-		output = output + "\nBuilding: " + typeOfBuild;
-		output = output + "\nProject name: " + projectName;
-		output = output + "\nBuilding address: " + buildAdress;
-		output = output + "\nTotal cost fee: " + fee;
-		output = output + "\nERF: " +erfNo;
-		output = output + "\nDeadline: " + deadline;
-		output = output + "\nAmount paid: " + amountPaid;
-		output = output + "\nFinalised: " + finalise;
+		String output = "Project number: " + this.getprojectNo();
+		output = output + "\nBuilding: " + this.gettypeOfBuild();
+		output = output + "\nProject name: " + this.getprojectName();
+		output = output + "\nBuilding address: " + this.getbuildAdress();
+		output = output + "\nTotal cost fee: " + this.getFee();
+		output = output + "\nERF: " + this.geterfNo();
+		output = output + "\nDeadline: " + this.getdeadline();
+		output = output + "\nAmount paid: " + this.getamountPaid();
+		output = output + "\nFinalised: " + this.getFinalise();
 		output = output + "\nContractor name: " + contractor.name;
 		output = output + "\nArchitect name: " + architect.name;
 		output = output + "\nCustomer name: " + customer.name;
 		
 		return output;
 	}
+	
 
 
 }

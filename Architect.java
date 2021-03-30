@@ -1,26 +1,61 @@
 package Poised;
 
-public class Architect {
+public class Architect extends People {
 	String name;
 	String telephoneNo;
 	String email;
 	String contactAddress;
-	
-	public Architect (String name, String telephoneNo, String email, String contactAdress) {
+
+	public Architect(String name, String telephoneNo, String email, String contactAdress) {
 		this.name = name;
 		this.telephoneNo = telephoneNo;
 		this.email = email;
 		this.contactAddress = contactAdress;
-		
+
 	}
-	
-	public String toString() {
-		String output = "Architect's name: " + name;
-		output = output + "\nArchitect's telephone number: " + telephoneNo;
-		output = output + "\nArchitect's email: " + email;
-		output = output + "\nArchitect's address: " + contactAddress;
-		
-		return output;
-	
+
+	@Override
+	public String getName() {
+		return this.name;
 	}
+
+	@Override
+	public String getPhoneNo() {
+		return this.telephoneNo;
+	}
+
+	@Override
+	public String getEmail() {
+		return this.email;
+	}
+
+	@Override
+	public String getAddress() {
+		return this.contactAddress;
+	}
+
+	@Override
+	public String setName(String newName) {
+		name = newName;
+		return name;
+	}
+
+	@Override
+	public String setPhoneNo(String newPhone) {
+		telephoneNo = newPhone;
+		return telephoneNo;
+	}
+
+	@Override
+	public String setEmail(String newEmail) {
+		email = newEmail;
+		return email;
+	}
+
+	@Override
+	public String setAddress(String newAddress) {
+		contactAddress = newAddress;
+		return contactAddress;
+	}
+
 }
