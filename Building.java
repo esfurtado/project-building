@@ -2,19 +2,6 @@ package Poised;
 
 public abstract class Building {
 	
-	public long projectNo;
-	public String typeOfBuild;
-	public String projectName;
-	public String buildAdress;
-	public double fee;
-	public long erfNo;
-	public String deadline;
-	public double amountPaid;
-	public Contractor contractor; 
-	public Architect architect; 
-	public Customer customer;
-	public boolean finalise;
-	
 	//getters
 	public abstract long getprojectNo();
 	public abstract String gettypeOfBuild();
@@ -24,9 +11,9 @@ public abstract class Building {
 	public abstract long geterfNo();
 	public abstract String getdeadline();
 	public abstract double getamountPaid();
-	public abstract Contractor getContractor();
-	public abstract Architect getArchitect();
-	public abstract Customer getCustomer();
+	public abstract People getContractor();
+	public abstract People getArchitect();
+	public abstract People getCustomer();
 	public abstract boolean getFinalise();
 	
 	
@@ -48,9 +35,9 @@ public abstract class Building {
 		output = output + "\nDeadline: " + this.getdeadline();
 		output = output + "\nAmount paid: " + this.getamountPaid();
 		output = output + "\nFinalised: " + this.getFinalise();
-		output = output + "\nContractor name: " + contractor.name;
-		output = output + "\nArchitect name: " + architect.name;
-		output = output + "\nCustomer name: " + customer.name;
+		output = output + "\nContractor name: " + this.getContractor().getName();
+		output = output + "\nArchitect name: " + this.getArchitect().getName();
+		output = output + "\nCustomer name: " + this.getCustomer().getName();
 		
 		return output;
 	}

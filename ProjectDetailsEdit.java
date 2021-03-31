@@ -40,12 +40,13 @@ public class ProjectDetailsEdit {
 		amountPaid = userInput.nextDouble();
 		userInput.nextLine();
 
-		Contractor contractor;
-		Architect architect;
-		Customer customer;
+		boolean finalise = false;
 
 		// Create all variables required to create Contractor, Architect and Customer
-		// objects
+		// objects -- this may later be implemented so the client creates these objects
+		// at will
+
+		String newCustomer = "customer";
 
 		String custName;
 		System.out.println("Customer name: ");
@@ -63,6 +64,8 @@ public class ProjectDetailsEdit {
 		System.out.println("Customer address: ");
 		custContactAdress = userInput.nextLine();
 
+		String newArchitect = "architect";
+
 		String arcName;
 		System.out.println("Architect name: ");
 		arcName = userInput.nextLine();
@@ -78,6 +81,8 @@ public class ProjectDetailsEdit {
 		String arcContactAdress;
 		System.out.println("Architect address: ");
 		arcContactAdress = userInput.nextLine();
+
+		String newContractor = "contractor";
 
 		String contName;
 		System.out.println("Contractor name: ");
@@ -98,17 +103,16 @@ public class ProjectDetailsEdit {
 		String projectName; // project name = type of building + customer name
 		projectName = typeOfBuild + " " + custName;
 
-		// Create a new object
-		contractor = new Contractor(contName, contTelephoneNo, contEmail, contContactAdress);
+		// Creating the objects necessary for building project
+		People contractor = PeopleFactory.getPerson(newContractor, contName, contTelephoneNo, contEmail,
+				contContactAdress);
 
-		architect = new Architect(arcName, arcTelephoneNo, arcEmail, arcContactAdress);
+		People architect = PeopleFactory.getPerson(newArchitect, arcName, arcTelephoneNo, arcEmail, arcContactAdress);
 
-		customer = new Customer(custName, custTelephoneNo, custEmail, custContactAdress);
+		People customer = PeopleFactory.getPerson(newCustomer, custName, custTelephoneNo, custEmail, custContactAdress);
 
-		Building newBuild = new Building(projectNo, typeOfBuild, buildAdress, fee, erfNo, deadline, amountPaid,
-				contractor, architect, customer);
-
-		System.out.println(contractor.toString());
+		Building newBuild = BuildingFactory.getBuilding(projectNo, typeOfBuild, buildAdress, fee, erfNo, deadline,
+				amountPaid, contractor, architect, customer, finalise);
 
 		// Make a main menu
 		boolean exit = false;
@@ -183,8 +187,8 @@ public class ProjectDetailsEdit {
 
 			// Finalise the project based on whether the fee has been paid in full
 			else if (optionSelect == 5) {
-				boolean finalise = newBuild.getFinalise();
-				amountPaid = newBuild.getamoundPaid();
+				finalise = newBuild.getFinalise();
+				amountPaid = newBuild.getamountPaid();
 				fee = newBuild.getFee();
 
 				if (finalise == true) {

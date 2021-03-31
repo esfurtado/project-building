@@ -9,13 +9,13 @@ public class House extends Building {
 	private long erfNo;
 	private String deadline;
 	private double amountPaid;
-	private Contractor contractor;
-	private Architect architect;
-	private Customer customer;
+	private People contractor;
+	private People architect;
+	private People customer;
 	private boolean finalise;
 
 	public House(long projectNo, String typeOfBuild, String buildAdress, double fee, long erfNo, String deadline,
-			double amountPaid, Contractor contractor, Architect architect, Customer customer, boolean finalise) {
+			double amountPaid, People contractor, People architect, People customer, boolean finalise) {
 		this.projectNo = projectNo;
 		this.typeOfBuild = typeOfBuild;
 		this.buildAdress = buildAdress;
@@ -64,7 +64,7 @@ public class House extends Building {
 	@Override
 	public String getprojectName() {
 		// project name = type of building + customer name
-		String name = this.gettypeOfBuild() + customer.name;
+		String name = this.gettypeOfBuild() + this.getCustomer().getName();
 		return name;
 	}
 
@@ -80,17 +80,17 @@ public class House extends Building {
 	}
 
 	@Override
-	public Contractor getContractor() {
+	public People getContractor() {
 		return this.contractor;
 	}
 
 	@Override
-	public Architect getArchitect() {
+	public People getArchitect() {
 		return this.architect;
 	}
 
 	@Override
-	public Customer getCustomer() {
+	public People getCustomer() {
 		return this.customer;
 	}
 

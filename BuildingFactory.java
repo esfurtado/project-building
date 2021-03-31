@@ -3,7 +3,7 @@ package Poised;
 public class BuildingFactory {
 	
 	public static Building getBuilding(long projectNo, String typeOfBuild, String buildAdress, double fee, long erfNo, String deadline,
-			double amountPaid, Contractor contractor, Architect architect, Customer customer, boolean finalise) {
+			double amountPaid, People contractor, People architect, People customer, boolean finalise) {
 		
 		if ("Bloc of flats".equalsIgnoreCase(typeOfBuild)) {
 
