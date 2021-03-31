@@ -1,5 +1,7 @@
 package Poised;
 
+//The People Super Class will contain the subclasses Customer, Contractor and Architect
+
 public abstract class People {
 
 	public String name;

@@ -1,5 +1,6 @@
 package Poised;
 
+//The Building factory will either produce a house or bloc of flats based on the type of build that is chosen
 public class BuildingFactory {
 	
 	public static Building getBuilding(long projectNo, String typeOfBuild, String buildAdress, double fee, long erfNo, String deadline,

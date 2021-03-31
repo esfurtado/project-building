@@ -2,6 +2,8 @@ package Poised;
 
 public class PeopleFactory {
 	
+	//The People Factory will create each person depending on the person type
+	
 	public static People getPerson(String personType, String name, String telephoneNo, String email, String contactAdress) {
 		
 		if ("contractor".equalsIgnoreCase(personType)) {

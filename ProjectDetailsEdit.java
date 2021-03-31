@@ -11,7 +11,9 @@ public class ProjectDetailsEdit {
 		Random randnum = new Random(); // This is to create the object attributes that have numbers
 
 		// Create all the variables that are needed to create a new building object
-		// (except the project name, which will be created at the end)
+		// The objects for now are created out of the user's menu, which may be changed
+		// on the next Capstone
+
 		long projectNo;
 		projectNo = randnum.nextInt(10000);
 
@@ -44,7 +46,7 @@ public class ProjectDetailsEdit {
 
 		// Create all variables required to create Contractor, Architect and Customer
 		// objects -- this may later be implemented so the client creates these objects
-		// at will
+		// at will as well
 
 		String newCustomer = "customer";
 
@@ -100,9 +102,6 @@ public class ProjectDetailsEdit {
 		System.out.println("Contractor address: ");
 		contContactAdress = userInput.nextLine();
 
-		String projectName; // project name = type of building + customer name
-		projectName = typeOfBuild + " " + custName;
-
 		// Creating the objects necessary for building project
 		People contractor = PeopleFactory.getPerson(newContractor, contName, contTelephoneNo, contEmail,
 				contContactAdress);
@@ -114,14 +113,14 @@ public class ProjectDetailsEdit {
 		Building newBuild = BuildingFactory.getBuilding(projectNo, typeOfBuild, buildAdress, fee, erfNo, deadline,
 				amountPaid, contractor, architect, customer, finalise);
 
-		// Make a main menu
+		// MAIN MENU
 		boolean exit = false;
 
 		while (exit == false) {
 			System.out.println("Which part of the project would you like to edit?\nPlease select from the following: \n"
 					+ "0. exit\n" + "1. View project details\n" + "2. Change the due date\n"
-					+ "3. Add/Subtract to the amount paid\n" + "4. Update the contractor's details\n"
-					+ "5. Finalise the project");
+					+ "3. Add/Subtract to the amount paid\n" + "4. Change the project fee\n"
+					+ "5. Update the contractor's details\n" + "6. Finalise the project");
 
 			int optionSelect = userInput.nextInt();
 			userInput.nextLine();
@@ -143,13 +142,27 @@ public class ProjectDetailsEdit {
 
 			else if (optionSelect == 3) {
 				double newAmountPaid;
-				System.out.println("Add (or subtract) the amount of money that has been paid/taken ");
+				System.out.println(
+						"Add (or subtract by entering a negative number) the amount of money that has been paid/taken ");
 				newAmountPaid = userInput.nextInt();
 				newBuild.setamountPaid(newAmountPaid);
 			}
 
-			// Make a secondary menu to edit the contractor's details
 			else if (optionSelect == 4) {
+
+				try {
+					System.out.println("What is the new fee? ");
+					double newFee = userInput.nextInt();
+					newBuild.setFee(newFee);
+				}
+
+				catch (Exception e) {
+					System.err.println("You cannot enter a negative number: " + e.getLocalizedMessage());
+				}
+			}
+
+			// Make a secondary menu to edit the contractor's details
+			else if (optionSelect == 5) {
 				System.out.println("Select which detail you would like to edit:\n" + "a. Name\n"
 						+ "b. Telephone number\n" + "c. Email\n" + "d. Contact address");
 
@@ -186,25 +199,39 @@ public class ProjectDetailsEdit {
 			}
 
 			// Finalise the project based on whether the fee has been paid in full
-			else if (optionSelect == 5) {
+			else if (optionSelect == 6) {
 				finalise = newBuild.getFinalise();
 				amountPaid = newBuild.getamountPaid();
 				fee = newBuild.getFee();
 
 				if (finalise == true) {
-					System.out.println("This project has already been finalised.");
+					System.out.println("This project has been finalised.");
 				} else {
-					if (fee == amountPaid) {
-						newBuild.setFinalise(true);
-						System.out.println("This project has been finalised.");
-					} else {
-						System.out.println(
-								"The project cannot be finalised until the fee has been fully paid. An invoice will be generated.");
+					boolean isFinal;
+					try {
+						isFinal = Finalise(fee, amountPaid);
+						finalise = newBuild.setFinalise(isFinal);
+					} catch (Exception e) {
+						System.err.println(e.getMessage());
 					}
 				}
 			}
 		}
 
+	}
+
+	// A method has been created to analise whether the fee has been paid (that is
+	// the amount paid covers the fee). If so it returns true, so then the finalise
+	// variable can be set as true.
+	// This also includes an error throw, in case the previous condition isn't met.
+	// This will be caught by a try and catch error handling
+
+	private static boolean Finalise(double fee, double amountPaid) {
+		if ((fee - amountPaid) > 0) {
+			throw new IllegalArgumentException(
+					"The project cannot be finalised until the fee has been fully paid. An invoice will be generated.");
+		}
+		return true;
 	}
 
 }

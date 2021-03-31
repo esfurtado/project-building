@@ -47,7 +47,7 @@ public class BlocOfFlats extends Building {
 
 	@Override
 	public boolean getFinalise() {
-		return false;
+		return this.finalise;
 	}
 
 	@Override
@@ -64,7 +64,7 @@ public class BlocOfFlats extends Building {
 	@Override
 	public String getprojectName() {
 		// project name = type of building + customer name
-		String name = this.gettypeOfBuild() + this.getCustomer().getName();
+		String name = this.gettypeOfBuild() + " " + this.getCustomer().getName();
 		return name;
 	}
 
@@ -114,7 +114,10 @@ public class BlocOfFlats extends Building {
 	}
 
 	@Override
-	public double setFee(double newFee) {
+	public double setFee(double newFee) { ////This will throw an error if the user inputs a negative number, which will be caught in a try/catch error handling
+		if (newFee < 0) {
+			throw new IllegalArgumentException("newFee cannot be negative");
+		}
 		fee = newFee;
 		return fee;
 	}

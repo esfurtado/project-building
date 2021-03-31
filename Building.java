@@ -1,7 +1,12 @@
 package Poised;
 
+//This project has been refactored by implementing the Factory design pattern
+//Building is an abstract Super Class
+//Subclasses will for now include House and BlocOfFlats
+
 public abstract class Building {
 	
+	//There may be some getters and setters which may not be used for now. These will be deleted accordingly when the final Capstone on this project is delivered.
 	//getters
 	public abstract long getprojectNo();
 	public abstract String gettypeOfBuild();

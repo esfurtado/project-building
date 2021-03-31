@@ -47,7 +47,7 @@ public class House extends Building {
 
 	@Override
 	public boolean getFinalise() {
-		return false;
+		return this.finalise;
 	}
 
 	@Override
@@ -57,14 +57,14 @@ public class House extends Building {
 
 	@Override
 	public String gettypeOfBuild() {
-		String build = "Bloc of flats";
+		String build = "House";
 		return build;
 	}
 
 	@Override
 	public String getprojectName() {
 		// project name = type of building + customer name
-		String name = this.gettypeOfBuild() + this.getCustomer().getName();
+		String name = this.gettypeOfBuild() + " " + this.getCustomer().getName();
 		return name;
 	}
 
@@ -74,7 +74,7 @@ public class House extends Building {
 	}
 
 	@Override
-	public long geterfNo() { // PROBABLY DELETE THIS
+	public long geterfNo() { // PROBABLY DELETE THIS, DON'T NEED IT
 		// TODO Auto-generated method stub
 		return 0;
 	}
@@ -114,7 +114,10 @@ public class House extends Building {
 	}
 
 	@Override
-	public double setFee(double newFee) {
+	public double setFee(double newFee) { //This will throw an error if the user inputs a negative number, which will be caught in a try/catch error handling
+		if (newFee < 0) {
+			throw new IllegalArgumentException("newFee cannot be negative");
+		}
 		fee = newFee;
 		return fee;
 	}
